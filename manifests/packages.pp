@@ -33,6 +33,7 @@ class php::packages (
   } else {
     package { $real_names:
       ensure => $ensure,
+      install_options => [ '--nogpgcheck', '--disablerepo=pe_repo,pc_repo' ]
     }
   }
 }
