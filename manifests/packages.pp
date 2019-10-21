@@ -17,6 +17,7 @@ class php::packages (
   Boolean $manage_repos  = $php::manage_repos,
   Array $names_to_prefix = prefix($php::params::common_package_suffixes, $php::package_prefix),
   Array $names           = $php::params::common_package_names,
+  Array $install_options = $php::install_options,
 ) inherits php::params {
 
   assert_private()
@@ -31,11 +32,13 @@ class php::packages (
       ensure => $ensure,
     }
   } else {
-    notify{ "HERE_1 $ php::install_options == $php::install_options, but still hardcode in manifest":}
-    notify{ "HERE_1 $ php::pear == $php::pear, but still hardcode in manifest":}
+    notify{ "HERE_1 $ install_options == $install_options":}
+    notify{ "HERE_1 $ php::install_options == $php::install_options":}
+    notify{ "HERE_1 $ php::pear == $php::pear":}
     package { $real_names:
       ensure => $ensure,
-      install_options => [ '--nogpgcheck', '--disablerepo=pe_repo,pc_repo' ]
+      #install_options => [ '--nogpgcheck', '--disablerepo=pe_repo,pc_repo' ]
+      install_options => $install_options,
     }
   }
 }
