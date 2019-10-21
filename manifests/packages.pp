@@ -31,6 +31,8 @@ class php::packages (
       ensure => $ensure,
     }
   } else {
+    notify{ "HERE_1 $ php::install_options == $php::install_options, but still hardcode in manifest":}
+    notify{ "HERE_1 $ php::pear == $php::pear, but still hardcode in manifest":}
     package { $real_names:
       ensure => $ensure,
       install_options => [ '--nogpgcheck', '--disablerepo=pe_repo,pc_repo' ]
